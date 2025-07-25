@@ -24,3 +24,8 @@ cd ..
 cd ..
 rm -rf neovim
 
+
+mkdir -p ~/.config/nvim/
+cd ~/.config/nvim/
+
+wget https://raw.githubusercontent.com/kiplimoboor/dotfiles/refs/heads/main/nvim/init.lua
