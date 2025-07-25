@@ -2,6 +2,7 @@
 sudo apt purge neovim -y
 sudo apt autoremove -y
 
+rm -rf neovim
 rm -rf ~/.local/share/nvim
 rm -rf ~/.config/nvim/
 
