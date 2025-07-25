@@ -7,7 +7,12 @@ rm -rf ~/.local/share/nvim
 rm -rf ~/.config/nvim/
 
 git clone --depth 1 -b stable https://github.com/neovim/neovim
-sudo apt-get install ninja-build gettext cmake curl build-essential -y
+sudo apt install ninja-build -y
+sudo apt install gettext -y
+sudo apt install cmake -y
+sudo apt install curl -y
+sudo apt install build-essential -y
+
 cd neovim
 make CMAKE_BUILD_TYPE=RelWithDebInfo
 cd build
