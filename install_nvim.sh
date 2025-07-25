@@ -3,6 +3,7 @@ sudo apt purge neovim -y
 sudo apt autoremove -y
 
 rm -rf ~/.local/share/nvim
+rm -rf ~/.config/nvim/
 
 git clone --depth 1 -b stable https://github.com/neovim/neovim
 sudo apt-get install ninja-build gettext cmake curl build-essential
