@@ -36,5 +36,3 @@ mkdir -p ~/.config/nvim/
 cd ~/.config/nvim/
 
 wget https://github.com/kiplimoboor/dotfiles/raw/refs/heads/main/nvim/init.lua
-
-source ~/.bashrc
