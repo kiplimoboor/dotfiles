@@ -25,7 +25,11 @@ cpack -G DEB
 sudo dpkg -i nvim-linux-x86_64.deb
 
 cd
-echo "alias vi=nvim" >> .bashrc
+
+if ! grep -q "alias vi=nvim" ~/.bashrc; then
+  echo "alias vi=nvim" >> ~/.bashrc
+fi
+
 rm -rf neovim
 
 mkdir -p ~/.config/nvim/
