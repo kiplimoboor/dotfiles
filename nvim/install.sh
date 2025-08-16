@@ -2,16 +2,19 @@
 
 sudo apt update -y
 sudo apt upgrade -y
+
 sudo apt purge neovim -y
+
 sudo apt autoremove -y
 
 sudo apt install git -y
-sudo apt install ninja-build -y
-sudo apt install gettext -y
-sudo apt install cmake -y
 sudo apt install curl -y
-sudo apt install build-essential -y
+sudo apt install cmake -y
+sudo apt install xclip -y
+sudo apt install gettext -y
 sudo apt install ripgrep -y
+sudo apt install ninja-build -y
+sudo apt install build-essential -y
 
 rm -rf neovim
 rm -rf ~/.local/share/nvim
