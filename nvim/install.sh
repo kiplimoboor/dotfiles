@@ -24,16 +24,13 @@ cd build
 cpack -G DEB
 sudo dpkg -i nvim-linux-x86_64.deb
 
-cd ..
-cd ..
+cd
+echo "alias vi=nvim" >> .bashrc
 rm -rf neovim
-
 
 mkdir -p ~/.config/nvim/
 cd ~/.config/nvim/
 
 wget https://github.com/kiplimoboor/dotfiles/raw/refs/heads/main/nvim/init.lua
-
-echo "alias vi=nvim"
 
 source ~/.bashrc
