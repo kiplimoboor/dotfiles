@@ -1,0 +1,5 @@
+prompt=Search for Apps
+no_actions=true
+insensitive=true
+allow_images=true
+image_size=32
