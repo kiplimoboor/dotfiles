@@ -14,9 +14,7 @@ else
 	NEW="light"
 	chromium --no-startup-window --set-color-scheme=light
 	chromium --no-startup-window --set-theme-color=242,240,229
-
 fi
-
 
 ## alacritty
 cp "$THEME_DIR/alacritty/$NEW.toml" "$CONFIG_DIR/alacritty/alacritty.toml"
@@ -33,12 +31,13 @@ cp "$THEME_DIR/nvim/$NEW.lua" "$CONFIG_DIR/nvim/lua/custom/plugins/colorscheme.l
 
 ## swayosd
 cp "$THEME_DIR/swayosd/$NEW.css" "$CONFIG_DIR/swayosd/style.css"
-pkill swayosd-server
-swayosd-server &
+pkill -x swayosd-server
+setsid uwsm-app -- swayosd-server >/dev/null 2>&1 &
 
 ## waybar
 cp "$THEME_DIR/waybar/$NEW.css" "$CONFIG_DIR/waybar/style.css"
-pkill waybar && hyprctl dispatch exec waybar
+pkill -x waybar
+setsid uwsm-app -- waybar >/dev/null 2>&1 &
 
 ## wofi
 cp "$THEME_DIR/wofi/$NEW.css" "$CONFIG_DIR/wofi/style.css"
