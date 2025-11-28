@@ -1,11 +1,11 @@
 return {
 	{
 		{
-			"catppuccin/nvim",
-			name = "catppuccin",
+			"kepano/flexoki-neovim",
+			name = "flexoki",
 			priority = 1000,
 			config = function()
-				vim.cmd("colorscheme catppuccin")
+				vim.cmd("colorscheme flexoki-light")
 			end,
 		},
 	},
