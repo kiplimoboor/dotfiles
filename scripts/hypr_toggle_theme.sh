@@ -31,13 +31,17 @@ hyprctl hyprpaper reload ,"$THEME_DIR/wallpaper/$NEW.png"
 ## nvim
 cp "$THEME_DIR/nvim/$NEW.lua" "$CONFIG_DIR/nvim/lua/custom/plugins/colorscheme.lua"
 
+## swayosd
+cp "$THEME_DIR/swayosd/$NEW.css" "$CONFIG_DIR/swayosd/style.css"
+pkill swayosd-server
+swayosd-server &
+
 ## waybar
 cp "$THEME_DIR/waybar/$NEW.css" "$CONFIG_DIR/waybar/style.css"
 pkill waybar && hyprctl dispatch exec waybar
 
 ## wofi
 cp "$THEME_DIR/wofi/$NEW.css" "$CONFIG_DIR/wofi/style.css"
-
 
 ## update theme mode file
 echo "$NEW" > "$THEME_FILE"
