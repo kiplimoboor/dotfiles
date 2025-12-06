@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"
 THEME_DIR="$CONFIG_DIR/theme"
