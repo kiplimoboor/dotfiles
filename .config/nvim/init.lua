@@ -91,16 +91,13 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = true
+vim.g.have_nerd_font = false
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
-vim.o.cmdheight = 0
 -- Make line numbers default
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -168,6 +165,9 @@ vim.o.scrolloff = 10
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
 vim.o.confirm = true
+
+-- remove cmdheight
+vim.o.cmdheight = 0
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -285,12 +285,6 @@ require("lazy").setup({
 				changedelete = { text = "~" },
 			},
 		},
-	},
-
-	{ -- Autopairs for brackets, braces etc
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = true,
 	},
 
 	-- NOTE: Plugins can also be configured to run Lua code when they are loaded.
@@ -416,14 +410,11 @@ require("lazy").setup({
 				-- You can put your default mappings / updates / etc. in here
 				--  All the info you're looking for is in `:help telescope.setup()`
 				--
-				defaults = {
-					file_ignore_patterns = {
-						"node_modules",
-					},
-					-- mappings = {
-					-- 	i = { ["<c-enter>"] = "to_fuzzy_refine" },
-					-- },
-				},
+				-- defaults = {
+				--   mappings = {
+				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+				--   },
+				-- },
 				-- pickers = {}
 				extensions = {
 					["ui-select"] = {
@@ -705,7 +696,22 @@ require("lazy").setup({
 				--
 				-- But for many setups, the LSP (`ts_ls`) will work just fine
 				ts_ls = {},
-				lua_ls = { settings = { Lua = { completion = { callSnippet = "Replace" } } } },
+				--
+
+				lua_ls = {
+					-- cmd = { ... },
+					-- filetypes = { ... },
+					-- capabilities = {},
+					settings = {
+						Lua = {
+							completion = {
+								callSnippet = "Replace",
+							},
+							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+							-- diagnostics = { disable = { 'missing-fields' } },
+						},
+					},
+				},
 			}
 
 			-- Ensure the servers and tools above are installed
@@ -722,7 +728,10 @@ require("lazy").setup({
 			-- You can add other tools here that you want Mason to install
 			-- for you, so that they are available from within Neovim.
 			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, { "stylua", "biome" })
+			vim.list_extend(ensure_installed, {
+				"stylua", -- Used to format Lua code
+				"biome",
+			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			require("mason-lspconfig").setup({
@@ -750,7 +759,7 @@ require("lazy").setup({
 			{
 				"<leader>f",
 				function()
-					require("conform").format({ async = true, lsp_format = "never" })
+					require("conform").format({ async = true, lsp_format = "fallback" })
 				end,
 				mode = "",
 				desc = "[F]ormat buffer",
@@ -758,8 +767,19 @@ require("lazy").setup({
 		},
 		opts = {
 			notify_on_error = false,
-			format_on_save = function(_)
-				return { timeout_ms = 500, lsp_format = "never" }
+			format_on_save = function(bufnr)
+				-- Disable "format_on_save lsp_fallback" for languages that don't
+				-- have a well standardized coding style. You can add additional
+				-- languages here or re-enable it for the disabled ones.
+				local disable_filetypes = { c = true, cpp = true }
+				if disable_filetypes[vim.bo[bufnr].filetype] then
+					return nil
+				else
+					return {
+						timeout_ms = 500,
+						lsp_format = "fallback",
+					}
+				end
 			end,
 			formatters_by_ft = {
 				lua = { "stylua" },
@@ -879,6 +899,29 @@ require("lazy").setup({
 			signature = { enabled = true },
 		},
 	},
+
+	-- { -- You can easily change to a different colorscheme.
+	-- 	-- Change the name of the colorscheme plugin below, and then
+	-- 	-- change the command in the config to whatever the name of that colorscheme is.
+	-- 	--
+	-- 	-- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+	-- 	"folke/tokyonight.nvim",
+	-- 	priority = 1000, -- Make sure to load this before all the other start plugins.
+	-- 	config = function()
+	-- 		---@diagnostic disable-next-line: missing-fields
+	-- 		require("tokyonight").setup({
+	-- 			styles = {
+	-- 				comments = { italic = false }, -- Disable italics in comments
+	-- 			},
+	-- 		})
+	--
+	-- 		-- Load the colorscheme here.
+	-- 		-- Like many other themes, this one has different styles, and you could load
+	-- 		-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+	-- 		vim.cmd.colorscheme("tokyonight-night")
+	-- 	end,
+	-- },
+
 	-- Highlight todo, notes, etc in comments
 	{
 		"folke/todo-comments.nvim",
