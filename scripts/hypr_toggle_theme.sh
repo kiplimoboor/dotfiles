@@ -32,7 +32,7 @@ cp "$THEME_DIR/alacritty/$NEW.toml" "$CONFIG_DIR/alacritty/alacritty.toml"
 
 ## hyprpaper
 cp "$THEME_DIR/hypr/hyprpaper-$NEW.conf" "$CONFIG_DIR/hypr/hyprpaper.conf"
-hyprctl hyprpaper reload ,"$THEME_DIR/wallpaper/$NEW.png"
+hyprctl hyprpaper wallpaper ,"$THEME_DIR/wallpaper/$NEW.png",
 
 ## waybar
 cp "$THEME_DIR/waybar/$NEW.css" "$CONFIG_DIR/waybar/style.css"
