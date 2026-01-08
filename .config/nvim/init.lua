@@ -28,10 +28,9 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 --- LSP and Diagnostics
 ---------------------------
 vim.lsp.enable({ "lua_ls", "ts_ls" })
-
 local severity = vim.diagnostic.severity
 vim.diagnostic.config({
-	{ virtual_lines = { current_line = true } },
+	virtual_lines = { current_line = true },
 	signs = {
 		text = {
 			[severity.ERROR] = " ",
@@ -41,7 +40,6 @@ vim.diagnostic.config({
 		},
 	},
 })
-
 ----------------------------
 --- Autocommands
 ----------------------------
@@ -125,7 +123,7 @@ require("lazy").setup({
 		lazy = false,
 		build = ":TSUpdate",
 		config = function()
-			local ensure_installed = { "javascript", "typescript", "lua", "python", "json" }
+			local ensure_installed = { "bash", "javascript", "typescript", "lua", "python", "json" }
 			require("nvim-treesitter").install(ensure_installed)
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = ensure_installed,
