@@ -171,5 +171,9 @@ require("lazy").setup({
 		end,
 	},
 
+	{ --- Git
+		"lewis6991/gitsigns.nvim",
+	},
+
 	{ import = "plugins" },
 })
