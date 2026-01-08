@@ -25,7 +25,7 @@ for addr in $XDG_RUNTIME_DIR/nvim.*; do
 		fi
 	fi
 done
-cp "$THEME_DIR/nvim/$NEW.lua" "$CONFIG_DIR/nvim/lua/custom/plugins/colorscheme.lua"
+cp "$THEME_DIR/nvim/$NEW.lua" "$CONFIG_DIR/nvim/lua/plugins/colorscheme.lua"
 
 ## alacritty
 cp "$THEME_DIR/alacritty/$NEW.toml" "$CONFIG_DIR/alacritty/alacritty.toml"
