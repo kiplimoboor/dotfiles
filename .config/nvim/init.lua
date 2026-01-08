@@ -20,6 +20,11 @@ opt.tabstop = 2
 opt.shiftwidth = 2
 
 ---------------------------
+--- Keymaps
+---------------------------
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+---------------------------
 --- LSP and Diagnostics
 ---------------------------
 vim.lsp.enable({ "lua_ls", "ts_ls" })
@@ -81,7 +86,23 @@ require("lazy").setup({
 		"stevearc/conform.nvim",
 		config = function()
 			require("conform").setup({
-				formatters_by_ft = { lua = { "stylua" } },
+				formatters_by_ft = {
+					lua = { "stylua" },
+					javascript = { "biome", "biome-organize-imports" },
+					css = { "biome" },
+					scss = { "biome" },
+					json = { "biome" },
+					jsonc = { "biome" },
+					typescript = { "biome", "biome-organize-imports" },
+					typescriptreact = { "biome", "biome-organize-imports" },
+				},
+				formatters = {
+					biome = {
+						command = "biome",
+						args = { "format", "--stdin-file-path", "$FILENAME", "--line-width", "120" },
+						stdin = true,
+					},
+				},
 				format_on_save = { timeout_ms = 500, lsp_format = "fallback" },
 			})
 		end,
@@ -144,6 +165,9 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
 			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
+			vim.keymap.set("n", "<leader>/", function()
+				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({ previewer = false }))
+			end, { desc = "Fuzzily search in current buffer" })
 		end,
 	},
 
