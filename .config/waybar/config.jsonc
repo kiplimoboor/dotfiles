@@ -48,7 +48,7 @@
 		"tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
 		"tooltip-format-disconnected": "Disconnected",
 		"interval": 3,
-		"spacing": 1,
-		"on-click": "alacritty --class floating --title floating -e impala"
+		"spacing": 1
+		// "on-click": "alacritty --class floating --title floating -e impala"
 	}
 }

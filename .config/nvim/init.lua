@@ -30,7 +30,7 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.lsp.enable({ "lua_ls", "ts_ls" })
 local severity = vim.diagnostic.severity
 vim.diagnostic.config({
-	virtual_lines = { current_line = true },
+	virtual_text = true,
 	signs = {
 		text = {
 			[severity.ERROR] = " ",
@@ -86,12 +86,13 @@ require("lazy").setup({
 			require("conform").setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
-					javascript = { "biome", "biome-organize-imports" },
 					css = { "biome" },
 					scss = { "biome" },
 					json = { "biome" },
 					jsonc = { "biome" },
+					javascript = { "biome", "biome-organize-imports" },
 					typescript = { "biome", "biome-organize-imports" },
+					javascriptreact = { "biome", "biome-organize-imports" },
 					typescriptreact = { "biome", "biome-organize-imports" },
 				},
 				formatters = {
