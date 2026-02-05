@@ -1,0 +1,15 @@
+* {
+	opacity: 0.97;
+	color: #cad3f5;
+	border-radius: 0;
+	background-color: #24273a;
+}
+
+label {
+	font-family: "JetBrainsMono Nerd Font";
+	font-size: 11pt;
+}
+
+progress {
+	background-color: #cad3f5;
+}
