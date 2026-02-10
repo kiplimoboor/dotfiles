@@ -1,0 +1,25 @@
+* {
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	outline: none;
+	font-size: 18px;
+	background-color: #24273a;
+	color: #c6d0f5;
+}
+
+#outer-box {
+	padding: 20px;
+	border: 1px solid #c6d0f5;
+}
+
+#text:selected {
+	font-size: 22px;
+}
+#input {
+	padding: 10px;
+}
+
+#img {
+	margin-right: 14px;
+}
